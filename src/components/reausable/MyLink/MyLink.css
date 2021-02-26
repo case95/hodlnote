@@ -1,0 +1,29 @@
+.my-link {
+  position: relative;
+  color: #0526b4;
+}
+
+.my-link::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #0526b4;
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+}
+
+.my-link:hover::before {
+  width: 100%;
+}
+
+.my-link:active {
+  color: #01071f;
+}
+
+.my-link:active::before {
+  background-color: #01071f;
+}
+/*# sourceMappingURL=MyLink.css.map */

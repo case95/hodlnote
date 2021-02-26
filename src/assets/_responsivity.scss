@@ -1,0 +1,48 @@
+@import "../components/config";
+
+.responsive-container {
+  padding: 50px $padding;
+  @include transitioner(padding);
+}
+
+.header,
+.footer {
+  padding: 0 $padding;
+  @include transitioner(padding);
+}
+
+@media screen and (min-width: $sm) {
+  .responsive-container {
+    padding: 50px $padding * 2;
+    @include transitioner(padding);
+  }
+
+  .header,
+  .footer {
+    padding: 0 $padding * 2;
+  }
+}
+
+@media screen and (min-width: $md) {
+  .responsive-container {
+    padding: 50px $padding * 3;
+    @include transitioner(padding);
+  }
+
+  .header,
+  .footer {
+    padding: 0 $padding * 3;
+  }
+}
+
+@media screen and (min-width: $lg) {
+  .responsive-container {
+    padding: 50px $padding * 4;
+    @include transitioner(padding);
+  }
+
+  .header,
+  .footer {
+    padding: 0 $padding * 4;
+  }
+}

@@ -1,7 +1,6 @@
 .header {
   width: 100%;
   height: 100px;
-  padding: 0 25px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,7 +43,6 @@
 }
 
 .header-nav-item-link {
-  color: #041b82;
   font-size: 14px;
   font-weight: 500;
 }

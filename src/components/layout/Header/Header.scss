@@ -3,7 +3,6 @@
 .header {
   width: 100%;
   height: 100px;
-  padding: 0 $padding;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,7 +28,6 @@
         margin-right: 0;
       }
       &-link {
-        color: $linksColor;
         font-size: $textSize;
         font-weight: $mediumWeight;
       }

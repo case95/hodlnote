@@ -1,0 +1,25 @@
+@import "../../config";
+
+.my-link {
+  position: relative;
+  color: $linksColor;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: $linksColor;
+    @include transitioner(width);
+  }
+  &:hover::before {
+    width: 100%;
+  }
+  &:active {
+    color: $activelinksColor;
+    &::before {
+      background-color: $activelinksColor;
+    }
+  }
+}

@@ -2,7 +2,8 @@
 $primaryColor: #5876fa;
 $secondaryColor: #fcd53d;
 $textColor: #333;
-$linksColor: darken($primaryColor, 40%);
+$linksColor: darken($primaryColor, 30%);
+$activelinksColor: darken($linksColor, 30%);
 
 // Font
 $poppins: "Poppins", sans-serif;
@@ -19,3 +20,12 @@ $boldWeight: 900;
 
 // Padding Unit
 $padding: 25px;
+
+// Breakpoints
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+
+@mixin transitioner($prop) {
+  transition: $prop 0.3s ease-in-out;
+}
