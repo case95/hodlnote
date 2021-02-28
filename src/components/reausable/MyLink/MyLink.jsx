@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 // Importing style
 import "./MyLink.css";
 
-const MyLink = ({ link, className, children }) => {
+const MyLink = ({ link, className, children, onClick }) => {
   return (
-    <Link to={link} className={`my-link ${className}`}>
+    <Link to={link} className={`my-link ${className}`} onClick={onClick}>
       {children}
     </Link>
   );

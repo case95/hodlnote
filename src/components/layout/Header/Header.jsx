@@ -29,7 +29,7 @@ const Header = (props) => {
           if (loggedStatus === false) break;
           else
             return (
-              <li className="header-nav-item" key={index}>
+              <li className="header-nav-item" key={name}>
                 <MyLink link={link} className="header-nav-item-link">
                   {name}
                 </MyLink>
@@ -37,11 +37,11 @@ const Header = (props) => {
             );
         case "Login":
           return (
-            <li className="header-nav-item" key={index}>
+            <li className="header-nav-item" key={name}>
               <MyLink
                 link={link}
                 className="header-nav-item-link"
-                onClick={(loggedStatus) => setLoggedStatus(!loggedStatus)}
+                onClick={() => setLoggedStatus(!loggedStatus)}
               >
                 {name}
               </MyLink>
@@ -50,7 +50,7 @@ const Header = (props) => {
 
         default:
           return (
-            <li className="header-nav-item" key={index}>
+            <li className="header-nav-item" key={name}>
               <MyLink link={link} className="header-nav-item-link">
                 {name}
               </MyLink>
@@ -63,7 +63,10 @@ const Header = (props) => {
 
   return (
     <header className="header">
-      <div className="header-logo"></div>
+      <MyLink link="/">
+        <div className="header-logo"></div>
+      </MyLink>
+
       <nav className="header-nav">
         <ul>{createNavLinks(navLinks)}</ul>
       </nav>

@@ -26,6 +26,25 @@ $sm: 576px;
 $md: 768px;
 $lg: 992px;
 
-@mixin transitioner($prop) {
-  transition: $prop 0.3s ease-in-out;
+@mixin transitioner($props...) {
+  $transition: ();
+  @each $prop in $props {
+    $transition: append($transition, $prop 0.2s ease-in-out, $separator: comma);
+  }
+  transition: $transition;
+}
+
+// Shadow
+
+@mixin shadow($px) {
+  box-shadow: -$px $px ($px * 2) 0 rgba(51, 51, 51, 0.5);
+}
+
+@function set-text-color($color) {
+  @if (lightness($color) > 70) {
+    // Test condition
+    @return #333; // If $colour's lightness is higher than 70 / 100 set color to #333
+  } @else {
+    @return #fff; // Else set color to white
+  }
 }

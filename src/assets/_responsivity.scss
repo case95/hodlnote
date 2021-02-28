@@ -11,6 +11,12 @@
   @include transitioner(padding);
 }
 
+.home {
+  &-hero {
+    margin: -50px (-$padding) 0 (-$padding);
+  }
+}
+
 @media screen and (min-width: $sm) {
   .responsive-container {
     padding: 50px $padding * 2;
@@ -20,6 +26,12 @@
   .header,
   .footer {
     padding: 0 $padding * 2;
+  }
+
+  .home {
+    &-hero {
+      margin: -50px (-2 * $padding) 0 (-2 * $padding);
+    }
   }
 }
 
@@ -33,6 +45,12 @@
   .footer {
     padding: 0 $padding * 3;
   }
+
+  .home {
+    &-hero {
+      margin: -50px (-3 * $padding) 0 (-3 * $padding);
+    }
+  }
 }
 
 @media screen and (min-width: $lg) {
@@ -44,5 +62,11 @@
   .header,
   .footer {
     padding: 0 $padding * 4;
+  }
+
+  .home {
+    &-hero {
+      margin: -50px (-4 * $padding) 0 (-4 * $padding);
+    }
   }
 }

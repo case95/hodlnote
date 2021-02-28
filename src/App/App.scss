@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap");
+@import "../components/config";
 
 * {
   -webkit-box-sizing: border-box;
@@ -10,8 +11,9 @@
   a {
     text-decoration: none;
   }
+  hr {
+    margin: (2 * $padding) 0;
+  }
 }
-.responsive-container {
-  background-color: red;
-}
+
 @import "../assets/responsivity";
