@@ -1,0 +1,23 @@
+@import "../../config";
+
+.container {
+  padding: $padding;
+  border-radius: ($padding/2);
+  color: set-text-color($primaryColor);
+}
+
+.container-blue {
+  background-color: rgba($primaryColor, 0.85);
+}
+
+.container-yellow {
+  background-color: rgba($secondaryColor, 0.85);
+}
+
+.container-white {
+  background-color: rgba(#fff, 0.85);
+}
+
+.container-black {
+  background-color: rgba($textColor, 0.8);
+}
