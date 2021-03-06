@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import MyLink from "../../reausable/MyLink/MyLink";
 
 import "./Header.css";
-const Header = ({ navLinksList }) => {
+const Header = ({ navLinksList, setNavLinksList }) => {
   const [loggedStatus, setLoggedStatus] = useState(false);
 
   // Component state.
@@ -15,23 +15,13 @@ const Header = ({ navLinksList }) => {
     return pages.map((page) => {
       const { link, name } = page;
       switch (name) {
-        case "Wallets":
-          if (loggedStatus === false) break;
-          else
-            return (
-              <li className="header-nav-item" key={name}>
-                <MyLink link={link} className="header-nav-item-link">
-                  {name}
-                </MyLink>
-              </li>
-            );
         case "Login":
           return (
             <li className="header-nav-item" key={name}>
               <MyLink
                 link={link}
                 className="header-nav-item-link"
-                onClick={() => setLoggedStatus(!loggedStatus)}
+                onClick={() => handleLogin(!loggedStatus)}
               >
                 {name}
               </MyLink>
@@ -47,8 +37,30 @@ const Header = ({ navLinksList }) => {
             </li>
           );
       }
-      return undefined;
     });
+  };
+
+  const handleLogin = () => {
+    const wallet = { name: "Wallets", link: "/Wallets" };
+
+    const included = navLinksList.some((obj) => {
+      console.log(obj);
+      return obj.name === wallet.name;
+    });
+
+    if (included) {
+      const filteredNavLinksList = navLinksList.filter((obj) => {
+        return obj.name !== wallet.name;
+      });
+      console.log("FILTERED NAV: " + filteredNavLinksList);
+      return setNavLinksList([...filteredNavLinksList]);
+    } else {
+      console.log("ADDED WALLETS");
+      return setNavLinksList([
+        ...navLinksList,
+        { name: "Wallets", link: "/Wallets" },
+      ]);
+    }
   };
 
   return (
@@ -61,7 +73,7 @@ const Header = ({ navLinksList }) => {
         <ul>
           {Array.isArray(navLinksList) &&
             navLinksList.length > 0 &&
-            createNavLinks(navLinks)}
+            createNavLinks(navLinksList)}
         </ul>
       </nav>
     </header>

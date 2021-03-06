@@ -9,12 +9,12 @@ const Footer = ({ navLinksList }) => {
   // Component state.
   const navLinks = navLinksList;
 
+  // Returns all the nav links in the Link component layout.
   const createNavLinks = (pages) => {
     return pages.map((page) => {
       const { link, name } = page;
       switch (name) {
-        case "Wallets":
-          break;
+        // We don't want
         default:
           return (
             <li className="footer-nav-item" key={name}>

@@ -22,13 +22,12 @@ function App() {
     { name: "Browse", link: "/browse" },
     { name: "Login", link: "/login" },
     { name: "Register", link: "/register" },
-    { name: "Wallets", link: "/Wallets" },
   ]);
 
   return (
     <div className="App">
       <Router>
-        <Header navLinksList={navLinksList} />
+        <Header navLinksList={navLinksList} setNavLinksList={setNavLinksList} />
         <div className="responsive-container">
           <Switch>
             <Route exact path="/browse" component={Browse} />
