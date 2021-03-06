@@ -1,0 +1,7 @@
+@import "../../config";
+.title {
+  font-size: $heroSize;
+  font-weight: $boldWeight;
+  text-transform: capitalize;
+  margin-bottom: $padding;
+}

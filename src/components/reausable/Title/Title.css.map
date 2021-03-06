@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,MAAM,CAAC;EACL,SAAS,ECWA,IAAI;EDVb,WAAW,ECgBA,GAAG;EDfd,cAAc,EAAE,UAAU;EAC1B,aAAa,ECiBL,IAAI;CDhBb",
+    "sources": [
+        "Title.scss",
+        "../../_config.scss"
+    ],
+    "names": [],
+    "file": "Title.css"
+}

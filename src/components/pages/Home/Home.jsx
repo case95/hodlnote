@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
-import MyLink from "../../reausable/MyLink/MyLink";
+// Importing custom components
 import Card from "../../reausable/Card/Card";
 import Container from "../../reausable/Container/Container";
+import Button from "../../reausable/Button/Button";
 
 import "./Home.css";
 
@@ -13,7 +15,7 @@ const Home = () => {
       alt: "Bitcoin",
       description: {
         title: "Bitcoin",
-        description: "Lorem ipsum dolor sit amet.",
+        text: "Lorem ipsum dolor sit amet.",
       },
     },
     {
@@ -22,7 +24,7 @@ const Home = () => {
       alt: "Ethereum",
       description: {
         title: "Ethereum",
-        description: "Lorem ipsum dolor sit amet.",
+        text: "Lorem ipsum dolor sit amet.",
       },
     },
     {
@@ -31,7 +33,7 @@ const Home = () => {
       alt: "Cardano",
       description: {
         title: "Cardano",
-        description:
+        text:
           "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
       },
     },
@@ -52,37 +54,41 @@ const Home = () => {
               Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem
               ipsum dolor sit amet.
             </p>
-            <button className="home-hero-content-button">
-              <MyLink>Browse!</MyLink>
-            </button>
+            <Link to="/browse">
+              <Button className="home-hero-content-button" type="link">
+                {" "}
+                Search!{" "}
+              </Button>
+            </Link>
           </Fragment>
         </Container>
       </div>
       <hr />
       <div className="home-features">
-        {features.map((feature) => {
+        {features.map((feature, index) => {
           const { image, alt, description } = feature;
+          const { title, text } = description;
           return (
             <Card
               image={image}
               alt={alt}
-              title={description.title}
-              description={description.description}
+              title={title}
+              description={text}
+              key={`card-${index}`}
             />
           );
         })}
-
-        {/* <div className="home-features-card">test 1</div>
-        <div className="home-features-card">test 2</div>
-        <div className="home-features-card">test 3</div> */}
       </div>
 
       <hr></hr>
 
       <div className="home-start">
-        <button className="home-start-button">
-          <MyLink>Browse!</MyLink>
-        </button>
+        <Link to="/browse">
+          <Button className="home-hero-content-button" type="link">
+            {" "}
+            Search!{" "}
+          </Button>
+        </Link>
         <div className="home-start-paragraph">
           <h1 className="home-start-paragraph-title">Start Test!</h1>
           <span className="home-start-paragraph-text">

@@ -1,28 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // IMporting custom components
 import MyLink from "../../reausable/MyLink/MyLink";
 
 import "./Header.css";
-const Header = (props) => {
+const Header = ({ navLinksList }) => {
   const [loggedStatus, setLoggedStatus] = useState(false);
 
-  const logInAndOut = (status) => {
-    return setLoggedStatus(!status);
-  };
-
-  const navLinksList = [
-    { name: "Browse", link: "/browse" },
-    { name: "Login", link: "/login" },
-    { name: "Register", link: "/register" },
-    { name: "Wallets", link: "/Wallets" },
-  ];
-
   // Component state.
-  const [navLinks, setnavLinks] = useState(navLinksList);
+  const navLinks = navLinksList;
 
   const createNavLinks = (pages) => {
-    return pages.map((page, index) => {
+    return pages.map((page) => {
       const { link, name } = page;
       switch (name) {
         case "Wallets":
@@ -56,19 +46,23 @@ const Header = (props) => {
               </MyLink>
             </li>
           );
-          break;
       }
+      return undefined;
     });
   };
 
   return (
-    <header className="header">
-      <MyLink link="/">
+    <header className="header" id="header">
+      <Link to="/">
         <div className="header-logo"></div>
-      </MyLink>
+      </Link>
 
       <nav className="header-nav">
-        <ul>{createNavLinks(navLinks)}</ul>
+        <ul>
+          {Array.isArray(navLinksList) &&
+            navLinksList.length > 0 &&
+            createNavLinks(navLinks)}
+        </ul>
       </nav>
     </header>
   );

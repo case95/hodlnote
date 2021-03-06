@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @ts-ignore
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import Footer from "../components/layout/Footer/Footer";
 
 // Importing page components
 import Home from "../components/pages/Home/Home";
-import Browse from "../components/pages/Browse";
+import Browse from "../components/pages/Browse/Browse";
 import Login from "../components/pages/Login";
 import Register from "../components/pages/Register";
 import Wallets from "../components/pages/Wallets";
@@ -17,10 +17,18 @@ import Wallets from "../components/pages/Wallets";
 import "./App.css";
 
 function App() {
+  // eslint-disable-next-line
+  const [navLinksList, setNavLinksList] = useState([
+    { name: "Browse", link: "/browse" },
+    { name: "Login", link: "/login" },
+    { name: "Register", link: "/register" },
+    { name: "Wallets", link: "/Wallets" },
+  ]);
+
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header navLinksList={navLinksList} />
         <div className="responsive-container">
           <Switch>
             <Route exact path="/browse" component={Browse} />
@@ -33,7 +41,7 @@ function App() {
             {/*<Route path="/something" render={(props) => { <Register prop1="prop1" {...props}/>}} />*/}
           </Switch>
         </div>
-        <Footer />
+        <Footer navLinksList={navLinksList} />
       </Router>
     </div>
   );

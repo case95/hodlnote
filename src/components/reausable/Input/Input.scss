@@ -1,0 +1,53 @@
+@import "../../config";
+
+.input {
+  position: relative;
+
+  min-width: 250px;
+  &-label {
+    display: block;
+    font-weight: $boldWeight;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+  }
+  &-field {
+    padding: ($padding/2);
+    width: 100%;
+    border-radius: $padding/2;
+    border: 1px solid $primaryColor;
+    @include transitioner(border, padding);
+    &:focus {
+      border: 3px solid $secondaryColor;
+      padding-top: ($padding/2 - 2px);
+      padding-bottom: ($padding/2 - 2px);
+    }
+  }
+}
+.required {
+  .input-field {
+    border: 3px solid red;
+    padding-top: ($padding/2 - 2px);
+    padding-bottom: ($padding/2 - 2px);
+  }
+  &::after {
+    content: "Required";
+    position: absolute;
+    top: 0px;
+    right: 0;
+    font-weight: $boldWeight;
+    text-transform: capitalize;
+    color: red;
+  }
+}
+.disabled {
+  .input-field {
+    background-color: #ddd;
+  }
+}
+
+small {
+  position: absolute;
+  bottom: -$padding;
+  left: 0;
+  color: red;
+}

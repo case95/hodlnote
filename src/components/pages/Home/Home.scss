@@ -1,3 +1,5 @@
+@import "../../config";
+
 .home {
   &-hero {
     height: calc(100vh - 100px);
@@ -25,6 +27,22 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  &-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: 50px;
+    }
+    .button {
+      margin-right: 0;
+      &-link {
+        font-size: $titleSize;
+      }
+    }
   }
 }
 @media screen and (min-width: 992px) {

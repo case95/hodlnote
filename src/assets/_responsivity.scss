@@ -7,7 +7,8 @@
 
 .header,
 .footer {
-  padding: 0 $padding;
+  padding-left: $padding;
+  padding-right: $padding;
   @include transitioner(padding);
 }
 
@@ -25,7 +26,8 @@
 
   .header,
   .footer {
-    padding: 0 $padding * 2;
+    padding-left: $padding * 2;
+    padding-right: $padding * 2;
   }
 
   .home {
@@ -43,7 +45,8 @@
 
   .header,
   .footer {
-    padding: 0 $padding * 3;
+    padding-left: $padding * 3;
+    padding-right: $padding * 3;
   }
 
   .home {
@@ -61,7 +64,8 @@
 
   .header,
   .footer {
-    padding: 0 $padding * 4;
+    padding-left: $padding * 4;
+    padding-right: $padding * 4;
   }
 
   .home {

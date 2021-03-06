@@ -1,0 +1,42 @@
+.accordion-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-transition: height 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.accordion-title-arrow {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 40px;
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+  -webkit-transform-origin: 50% 25%;
+          transform-origin: 50% 25%;
+}
+
+.accordion-title:hover .accordion-title-arrow {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.accordion-content {
+  height: 0%;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: height 0.2s ease-in-out, max-height 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out, max-height 0.2s ease-in-out;
+}
+
+.accordion-content-open {
+  height: 100%;
+  max-height: 1200px;
+}
+/*# sourceMappingURL=Accordion.css.map */

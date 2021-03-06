@@ -1,0 +1,191 @@
+.browse-by-value {
+  -webkit-transition: height 0.3s ease-in-out;
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+  padding-bottom: 25px;
+}
+
+.browse-by-value form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.browse-by-value form .browse-by-value-input {
+  min-width: 100%;
+  margin: 12.5px 0;
+}
+
+.browse-by-value form .browse-by-value-input:first-child {
+  margin-top: 0;
+}
+
+.browse-by-value form .browse-by-value-input:nth-child(3) {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.browse-by-value form .browse-by-value-input:nth-child(3)::before {
+  content: "OR";
+  position: absolute;
+  top: 125%;
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
+  font-size: 21px;
+  right: 50%;
+}
+
+.browse-by-value form .browse-by-value-confirmation {
+  min-width: 100%;
+}
+
+.browse-by-value form .browse-by-value-confirmation span {
+  color: #5876fa;
+}
+
+.browse-by-value form .browse-by-value-button {
+  margin: 12.5px auto 0 auto;
+}
+
+.browse-by-date {
+  -webkit-transition: height 0.3s ease-in-out;
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+  padding-bottom: 25px;
+}
+
+.browse-by-date form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.browse-by-date form .browse-by-date-input {
+  min-width: 100%;
+  margin: 12.5px 0;
+}
+
+.browse-by-date form .browse-by-date-input:first-child {
+  margin-top: 0;
+}
+
+.browse-by-date form .browse-by-date-input:nth-child(6) {
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.browse-by-date form .browse-by-date-input:nth-child(6)::before {
+  content: "OR";
+  position: absolute;
+  top: 125%;
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
+  font-size: 21px;
+  right: 50%;
+}
+
+.browse-by-date form .browse-by-date-confirmation {
+  min-width: 100%;
+}
+
+.browse-by-date form .browse-by-date-confirmation span {
+  color: #5876fa;
+}
+
+.browse-by-date form .browse-by-date-button {
+  margin: 12.5px auto 0 auto;
+}
+
+.browse-by-date-chart {
+  width: 100%;
+  max-width: 800px;
+  padding-top: 50%;
+  background-color: #fcd53d;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 25px auto;
+}
+
+@media screen and (min-width: 592px) {
+  .browse .browse-by-value-input {
+    min-width: 100%;
+    margin: 12.5px 0 !important;
+  }
+  .browse .browse-by-value-input:first-child {
+    margin-top: 0;
+  }
+  .browse .browse-by-value-input:nth-child(3) {
+    min-width: 45%;
+    max-width: 45%;
+    position: relative;
+  }
+  .browse .browse-by-value-input:nth-child(3)::before {
+    content: "OR";
+    position: absolute;
+    top: 50% !important;
+    -webkit-transform: translateY(-20%);
+            transform: translateY(-20%);
+    font-size: 21px;
+    right: -11.5% !important;
+  }
+  .browse .browse-by-value-input:nth-child(4) {
+    min-width: 45%;
+    max-width: 45%;
+  }
+  .browse .browse-by-date-input {
+    min-width: 100%;
+    margin: 12.5px 0 !important;
+  }
+  .browse .browse-by-date-input:first-child {
+    margin-top: 0;
+    min-width: 47.5%;
+    max-width: 47.5%;
+  }
+  .browse .browse-by-date-input:nth-child(2) {
+    min-width: 47.5%;
+    max-width: 47.5%;
+  }
+  .browse .browse-by-date-input:nth-child(3) {
+    min-width: 47.5%;
+    max-width: 47.5%;
+  }
+  .browse .browse-by-date-input:nth-child(4) {
+    min-width: 47.5%;
+    max-width: 47.5%;
+  }
+  .browse .browse-by-date-input:nth-child(6) {
+    min-width: 45%;
+    max-width: 45%;
+    position: relative;
+  }
+  .browse .browse-by-date-input:nth-child(6)::before {
+    content: "OR";
+    position: absolute;
+    top: 50% !important;
+    -webkit-transform: translateY(-20%);
+            transform: translateY(-20%);
+    font-size: 21px;
+    right: -11.5% !important;
+  }
+  .browse .browse-by-date-input:nth-child(7) {
+    min-width: 45%;
+    max-width: 45%;
+  }
+}
+/*# sourceMappingURL=Browse.css.map */

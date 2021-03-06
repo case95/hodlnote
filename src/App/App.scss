@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap");
 @import "../components/config";
 
+html {
+  scroll-behavior: smooth;
+}
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -10,10 +13,37 @@
   font-family: "Poppins", sans-serif;
   a {
     text-decoration: none;
+    font-size: $textSize;
+    font-weight: $mediumWeight;
+    color: $linksColor;
+    &:active {
+      color: $activelinksColor;
+    }
+  }
+  p {
+    font-size: $textSize;
+  }
+  span {
+    font-size: $textSize;
   }
   hr {
     margin: (2 * $padding) 0;
+    height: 0;
+    background: $textColor;
+    border: 0.5px solid $textColor;
   }
+  input:focus {
+    outline: none;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 @import "../assets/responsivity";

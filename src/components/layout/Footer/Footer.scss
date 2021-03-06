@@ -1,0 +1,64 @@
+@import "../../config";
+
+.footer {
+  width: 100%;
+  background-color: $primaryColor;
+  padding-top: $padding;
+  padding-bottom: $padding;
+  &-nav {
+    display: flex;
+    justify-content: space-between;
+    ul {
+      display: flex;
+      align-items: center;
+    }
+    &-item {
+      margin: 0 10px;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      &-link {
+        font-size: $textSize;
+        font-weight: $mediumWeight;
+        color: white;
+        &::before {
+          background-color: white;
+        }
+      }
+    }
+  }
+  .scroll-to-top {
+    line-height: $textSize/2 + 5;
+    text-align: right;
+    padding-right: $padding;
+    position: relative;
+    color: white;
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      font-size: $titleSize;
+      @include transitioner(transform);
+    }
+    &:hover::after {
+      transform: translateY(-100%);
+    }
+  }
+  hr {
+    margin-top: ($padding/2);
+    margin-bottom: ($padding/2);
+    border: $linksColor 1px solid;
+    background-color: $linksColor;
+  }
+  &-copyright {
+    color: $linksColor;
+    text-align: center;
+  }
+}

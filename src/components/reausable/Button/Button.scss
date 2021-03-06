@@ -1,0 +1,54 @@
+@import "../../config";
+
+.button {
+  color: $textColor;
+  font-weight: $mediumWeight;
+  padding: ($padding/2);
+  border-radius: 1000px;
+  outline: none;
+  background: linear-gradient(
+    225deg,
+    $secondaryColor 0%,
+    $secondaryColor 40%,
+    white 50%,
+    $secondaryColor 60%,
+    $secondaryColor 100%
+  );
+  background-size: 275%;
+  background-position-x: left;
+  background-color: $secondaryColor;
+  border-left: 3px solid darken($secondaryColor, 15%);
+  border-bottom: 3px solid darken($secondaryColor, 15%);
+  border-right: 3px solid lighten($secondaryColor, 15%);
+  border-top: 3px solid lighten($secondaryColor, 15%);
+  @include transitioner(background-position, box-shadow);
+  @include shadow(3px);
+  cursor: pointer;
+  &-link {
+    position: relative;
+    @include transitioner(padding);
+
+    &::after {
+      content: "\f105";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      @include transitioner(opacity);
+    }
+  }
+  &:hover {
+    background-position-x: right;
+    @include shadow(6px);
+    & .button-link {
+      padding-right: ($padding/2);
+      &::after {
+        opacity: 1;
+        right: 0;
+      }
+    }
+  }
+}

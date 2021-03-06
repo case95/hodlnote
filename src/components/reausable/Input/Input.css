@@ -1,0 +1,54 @@
+.input {
+  position: relative;
+  min-width: 250px;
+}
+
+.input-label {
+  display: block;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  padding: 12.5px;
+  width: 100%;
+  border-radius: 12.5px;
+  border: 1px solid #5876fa;
+  -webkit-transition: border 0.2s ease-in-out, padding 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out, padding 0.2s ease-in-out;
+}
+
+.input-field:focus {
+  border: 3px solid #fcd53d;
+  padding-top: 10.5px;
+  padding-bottom: 10.5px;
+}
+
+.required .input-field {
+  border: 3px solid red;
+  padding-top: 10.5px;
+  padding-bottom: 10.5px;
+}
+
+.required::after {
+  content: "Required";
+  position: absolute;
+  top: 0px;
+  right: 0;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: red;
+}
+
+.disabled .input-field {
+  background-color: #ddd;
+}
+
+small {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  color: red;
+}
+/*# sourceMappingURL=Input.css.map */
