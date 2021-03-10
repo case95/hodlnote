@@ -5,26 +5,34 @@ import MyLink from "../../reausable/MyLink/MyLink";
 
 import "./Footer.css";
 
-const Footer = ({ navLinksList }) => {
-  // Component state.
-  const navLinks = navLinksList;
-
+const Footer = ({ navLinksList, onLogin }) => {
   // Returns all the nav links in the Link component layout.
   const createNavLinks = (pages) => {
     return pages.map((page) => {
       const { link, name } = page;
       switch (name) {
-        // We don't want
+        case "Login":
+          return (
+            <li className="header-nav-item" key={name}>
+              <MyLink
+                link={link}
+                className="header-nav-item-link"
+                onClick={() => onLogin()}
+              >
+                {name}
+              </MyLink>
+            </li>
+          );
+
         default:
           return (
-            <li className="footer-nav-item" key={name}>
-              <MyLink link={link} className="footer-nav-item-link">
+            <li className="header-nav-item" key={name}>
+              <MyLink link={link} className="header-nav-item-link">
                 {name}
               </MyLink>
             </li>
           );
       }
-      return undefined;
     });
   };
   return (
@@ -33,7 +41,7 @@ const Footer = ({ navLinksList }) => {
         <ul>
           {Array.isArray(navLinksList) &&
             navLinksList.length > 0 &&
-            createNavLinks(navLinks)}
+            createNavLinks(navLinksList)}
         </ul>
         <a href="#header" className="scroll-to-top">
           Back <br></br> to Top

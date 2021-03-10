@@ -14,6 +14,7 @@ const Input = ({
   requiredLabel,
   className,
   disabled,
+  children,
   ...otherProps
 }) => {
   const numberSanitizer = (e) => {
@@ -30,38 +31,73 @@ const Input = ({
       document.getElementById(`input-${id}`).classList.remove("required");
     }
   };
-
-  return (
-    <div
-      className={`input ${requiredLabel === true ? " required " : ""}  ${
-        disabled === true ? " disabled " : ""
-      }${className}`}
-      id={`input-${id}`}
-    >
-      <label className="input-label" htmlFor={id}>
-        {label}
-      </label>
-      <input
-        className={`input-field `}
-        required={required}
-        id={id}
-        type={type}
-        min={type === "number" ? "0" : undefined}
-        value={value}
-        placeholder={placeholder}
-        disabled={disabled}
-        onChange={(e) => {
-          onChange(e);
-          requiredResetter(e);
-        }}
-        onKeyDown={(e) => {
-          numberSanitizer(e);
-        }}
-        {...otherProps}
-      ></input>
-      {!disabled && error && <small>{error}</small>}
-    </div>
-  );
+  if (type !== "select") {
+    return (
+      <div
+        className={`input ${requiredLabel === true ? " required " : ""}  ${
+          disabled === true ? " disabled " : ""
+        }${className}`}
+        id={`input-${id}`}
+      >
+        <label className="input-label" htmlFor={id}>
+          {label}
+        </label>
+        <input
+          className={`input-field `}
+          required={required}
+          id={id}
+          type={type}
+          min={type === "number" ? "0" : undefined}
+          value={value}
+          placeholder={placeholder}
+          disabled={disabled}
+          onChange={(e) => {
+            onChange(e);
+            requiredResetter(e);
+          }}
+          onKeyDown={(e) => {
+            numberSanitizer(e);
+          }}
+          {...otherProps}
+        ></input>
+        {!disabled && error && <small>{error}</small>}
+      </div>
+    );
+  } else {
+    return (
+      <div
+        className={`input ${requiredLabel === true ? " required " : ""}  ${
+          disabled === true ? " disabled " : ""
+        }${className}`}
+        id={`input-${id}`}
+      >
+        <label className="input-label" htmlFor={id}>
+          {label}
+        </label>
+        <select
+          className={`input-field `}
+          required={required}
+          id={id}
+          type={type}
+          min={type === "number" ? "0" : undefined}
+          value={value}
+          placeholder={placeholder}
+          disabled={disabled}
+          onChange={(e) => {
+            onChange(e);
+            requiredResetter(e);
+          }}
+          onKeyDown={(e) => {
+            numberSanitizer(e);
+          }}
+          {...otherProps}
+        >
+          {children}
+        </select>
+        {!disabled && error && <small>{error}</small>}
+      </div>
+    );
+  }
 };
 
 export default Input;

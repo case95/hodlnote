@@ -12,6 +12,10 @@ html {
   font-family: "Poppins", sans-serif;
 }
 
+* .responsive-container {
+  min-height: calc(100vh - 225px);
+}
+
 * a {
   text-decoration: none;
   font-size: 14px;

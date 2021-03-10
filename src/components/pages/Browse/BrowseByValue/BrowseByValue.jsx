@@ -1,39 +1,42 @@
 import React, { Component, Fragment } from "react";
-import Joi from "joi";
 
 // Importing custom components
 import Input from "../../../reausable/Input/Input";
 import Button from "../../../reausable/Button/Button";
 
+import { validate, validateInput } from "./utils/validation";
+
 class BrowseByValue extends Component {
   state = {
     inputByValue: [
       {
-        id: "fiatCurrency",
+        name: "fiatCurrency",
         label: "Fiat Currency",
-        type: "text",
+        type: "select",
         placeholder: "Your FIAT Currency",
       },
       {
-        id: "cryptoCurrency",
+        name: "cryptoCurrency",
         label: "Crypto Currency",
         type: "text",
         placeholder: "Your Crypto Currency",
       },
       {
+        name: "fiatAmount",
         id: "fiatAmount",
         label: "Fiat Amount",
         type: "number",
         placeholder: "Invested Amount in FIAT",
       },
       {
+        name: "cryptoAmount",
         id: "cryptoAmount",
         label: "Crypto Amount",
         type: "number",
         placeholder: "Invested Amount in Crypto",
       },
       {
-        id: "unitValue",
+        name: "unitValue",
         label: "Crypto unit value",
         type: "number",
         placeholder: "Crypto Value per Unit",
@@ -50,21 +53,13 @@ class BrowseByValue extends Component {
     requireds: {},
   };
 
-  schema = Joi.object({
-    fiatCurrency: Joi.string().uppercase().valid("EUR", "USD", "AUD"),
-    cryptoCurrency: Joi.string().uppercase().valid("BTC", "ETH", "XRP"),
-    fiatAmount: Joi.number().greater(0),
-    cryptoAmount: Joi.number().greater(0),
-    unitValue: Joi.number().greater(0),
-  });
-
   componentDidMount() {
     const requireds = {};
     const inputs = Array.from(
       document.querySelectorAll(".browse-by-value-input")
     ).filter((input) => input.childNodes[1].disabled === false);
     inputs.map((input) => {
-      requireds[input.childNodes[1].id] = false;
+      requireds[input.childNodes[1].name] = false;
     });
     this.setState({ requireds });
   }
@@ -82,34 +77,15 @@ class BrowseByValue extends Component {
     }
   }
 
-  validate = () => {
-    const validationResult = this.schema.validate(this.state.dataByValue, {
-      abortEarly: false,
-    });
-    if (!validationResult.error) return null;
-    const errors = {};
-    validationResult.error.details.map((error) => {
-      return (errors[error.path[0]] = error.message);
-    });
-    return errors;
-  };
-
-  validateInput = (currentTarget) => {
-    const data = { [currentTarget.id]: currentTarget.value };
-    const result = this.schema.validate(data);
-    if (!result.error) return null;
-    return result.error.details[0].message;
-  };
-
   onInputChange = (e) => {
     // Sets the input data in the data state
 
     const dataByValue = { ...this.state.dataByValue };
 
-    dataByValue[e.target.id] = e.target.value;
-    if (e.target.id === "fiatAmount") {
+    dataByValue[e.target.name] = e.target.value;
+    if (e.target.name === "fiatAmount") {
       delete dataByValue.cryptoAmount;
-    } else if (e.target.id === "cryptoAmount") {
+    } else if (e.target.name === "cryptoAmount") {
       delete dataByValue.fiatAmount;
     }
     this.setState({
@@ -119,16 +95,16 @@ class BrowseByValue extends Component {
     // Manages errors for error labels
 
     const errors = { ...this.state.errors };
-    const errorMessage = this.validateInput(e.target);
+    const errorMessage = validateInput(e.target);
 
     if (errorMessage) {
-      errors[e.target.id] = errorMessage;
+      errors[e.target.name] = errorMessage;
     } else {
-      delete errors[e.target.id];
+      delete errors[e.target.name];
     }
-    if (e.target.id === "fiatAmount" && errors.cryptoAmount) {
+    if (e.target.name === "fiatAmount" && errors.cryptoAmount) {
       delete errors.cryptoAmount;
-    } else if (e.target.id === "cryptoAmount" && errors.fiatAmount) {
+    } else if (e.target.name === "cryptoAmount" && errors.fiatAmount) {
       delete errors.fiatAmount;
     }
     this.setState({
@@ -140,17 +116,17 @@ class BrowseByValue extends Component {
     const requireds = { ...this.state.requireds };
 
     if (e.target.value == false) {
-      requireds[e.target.id] = true;
-      if (e.target.id === "fiatAmount") {
+      requireds[e.target.name] = true;
+      if (e.target.name === "fiatAmount") {
         // Clears required label from the disabled input
         requireds.cryptoAmount = false;
       }
-      if (e.target.id === "cryptoAmount") {
+      if (e.target.name === "cryptoAmount") {
         // Clears required label from the disabled input
         requireds.fiatAmount = false;
       }
     } else {
-      requireds[e.target.id] = false;
+      requireds[e.target.name] = false;
     }
     this.setState({
       requireds,
@@ -160,7 +136,7 @@ class BrowseByValue extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const errors = this.validate();
+    const errors = validate(this.state.dataByValue);
     const inputs = Array.from(
       document.querySelectorAll(".browse-by-value-input")
     ).filter((input) => input.childNodes[1].disabled === false);
@@ -186,10 +162,10 @@ class BrowseByValue extends Component {
     } = this.state.dataByValue;
     return (
       <div className="browse-by-value" id="browse-by-value">
-        <form onSubmit={(e) => this.onSubmit(e)} id="form" autocomplete="off">
+        <form onSubmit={(e) => this.onSubmit(e)} id="form" autoComplete="off">
           {this.state.inputByValue.map((input, index) => {
-            const { id, label, type, placeholder } = input;
-            switch (id) {
+            const { id, label, type, placeholder, name } = input;
+            switch (name) {
               case "fiatAmount":
                 return (
                   <Input
@@ -200,9 +176,9 @@ class BrowseByValue extends Component {
                     onChange={(e) => {
                       this.onInputChange(e);
                     }}
-                    error={this.state.errors[id]}
-                    requiredLabel={this.state.requireds[id]}
-                    key={id}
+                    error={this.state.errors[name]}
+                    requiredLabel={this.state.requireds[name]}
+                    key={name}
                     className="browse-by-value-input"
                     disabled={
                       "cryptoAmount" in this.state.dataByValue &&
@@ -215,6 +191,8 @@ class BrowseByValue extends Component {
                       )
                     }
                     step=".01"
+                    value={this.state.dataByValue[name]}
+                    name={name}
                   />
                 );
               case "cryptoAmount":
@@ -227,9 +205,9 @@ class BrowseByValue extends Component {
                     onChange={(e) => {
                       this.onInputChange(e);
                     }}
-                    error={this.state.errors[id]}
-                    requiredLabel={this.state.requireds[id]}
-                    key={id}
+                    error={this.state.errors[name]}
+                    requiredLabel={this.state.requireds[name]}
+                    key={name}
                     className="browse-by-value-input"
                     disabled={
                       "fiatAmount" in this.state.dataByValue &&
@@ -242,23 +220,47 @@ class BrowseByValue extends Component {
                       )
                     }
                     step=".00000001"
+                    value={this.state.dataByValue[name]}
+                    name={name}
                   />
                 );
-
-              default:
+              case "fiatCurrency":
                 return (
                   <Input
-                    id={id}
                     label={label}
                     type={type}
                     placeholder={placeholder}
                     onChange={(e) => {
                       this.onInputChange(e);
                     }}
-                    error={this.state.errors[id]}
-                    requiredLabel={this.state.requireds[id]}
-                    key={id}
+                    error={this.state.errors[name]}
+                    requiredLabel={this.state.requireds[name]}
+                    key={name}
                     className="browse-by-value-input"
+                    value={this.state.dataByValue[name].id}
+                    name={name}
+                  >
+                    {this.props.fiatCurrencies.map((currency) => {
+                      return <option value={currency.id}>{currency.id}</option>;
+                    })}
+                  </Input>
+                );
+
+              default:
+                return (
+                  <Input
+                    label={label}
+                    type={type}
+                    placeholder={placeholder}
+                    onChange={(e) => {
+                      this.onInputChange(e);
+                    }}
+                    error={this.state.errors[name]}
+                    requiredLabel={this.state.requireds[name]}
+                    key={name}
+                    className="browse-by-value-input"
+                    value={this.state.dataByValue[name]}
+                    name={name}
                   />
                 );
             }

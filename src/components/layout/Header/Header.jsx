@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 // IMporting custom components
 import MyLink from "../../reausable/MyLink/MyLink";
 
 import "./Header.css";
-const Header = ({ navLinksList, setNavLinksList }) => {
-  const [loggedStatus, setLoggedStatus] = useState(false);
-
-  // Component state.
-  const navLinks = navLinksList;
-
+const Header = ({ navLinksList, onLogin }) => {
   const createNavLinks = (pages) => {
     return pages.map((page) => {
       const { link, name } = page;
@@ -21,7 +16,7 @@ const Header = ({ navLinksList, setNavLinksList }) => {
               <MyLink
                 link={link}
                 className="header-nav-item-link"
-                onClick={() => handleLogin(!loggedStatus)}
+                onClick={() => onLogin()}
               >
                 {name}
               </MyLink>
@@ -38,29 +33,6 @@ const Header = ({ navLinksList, setNavLinksList }) => {
           );
       }
     });
-  };
-
-  const handleLogin = () => {
-    const wallet = { name: "Wallets", link: "/Wallets" };
-
-    const included = navLinksList.some((obj) => {
-      console.log(obj);
-      return obj.name === wallet.name;
-    });
-
-    if (included) {
-      const filteredNavLinksList = navLinksList.filter((obj) => {
-        return obj.name !== wallet.name;
-      });
-      console.log("FILTERED NAV: " + filteredNavLinksList);
-      return setNavLinksList([...filteredNavLinksList]);
-    } else {
-      console.log("ADDED WALLETS");
-      return setNavLinksList([
-        ...navLinksList,
-        { name: "Wallets", link: "/Wallets" },
-      ]);
-    }
   };
 
   return (
