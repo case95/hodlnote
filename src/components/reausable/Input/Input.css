@@ -14,13 +14,46 @@
   padding: 12.5px;
   width: 100%;
   border-radius: 12.5px;
-  border: 1px solid #5876fa;
+  border: 1px solid var(--primaryColor);
+  background-color: var(--bgColor);
   -webkit-transition: border 0.2s ease-in-out, padding 0.2s ease-in-out;
   transition: border 0.2s ease-in-out, padding 0.2s ease-in-out;
+  color: var(--textColor);
+}
+
+.input-field::-webkit-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--textColor);
+  -webkit-filter: brightness(50%);
+          filter: brightness(50%);
+}
+
+.input-field:-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--textColor);
+  filter: brightness(50%);
+}
+
+.input-field::-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--textColor);
+  filter: brightness(50%);
+}
+
+.input-field::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--textColor);
+  -webkit-filter: brightness(50%);
+          filter: brightness(50%);
+}
+
+.input-field::-webkit-calendar-picker-indicator {
+  -webkit-filter: invert(50%);
+          filter: invert(50%);
 }
 
 .input-field:focus {
-  border: 3px solid #fcd53d;
+  border: 3px solid var(--secondaryColor);
   padding-top: 10.5px;
   padding-bottom: 10.5px;
 }

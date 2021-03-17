@@ -54,7 +54,7 @@ const Home = () => {
               Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem
               ipsum dolor sit amet.
             </p>
-            <Link to="/browse">
+            <Link to="/browse" className="">
               <Button className="home-hero-content-button" type="link">
                 {" "}
                 Search!{" "}

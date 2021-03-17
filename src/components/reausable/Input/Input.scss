@@ -14,10 +14,21 @@
     padding: ($padding/2);
     width: 100%;
     border-radius: $padding/2;
-    border: 1px solid $primaryColor;
+    border: 1px solid var(--primaryColor);
+    background-color: var(--bgColor);
     @include transitioner(border, padding);
+    color: var(--textColor);
+
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: var(--textColor);
+      filter: brightness(50%);
+    }
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(50%);
+    }
     &:focus {
-      border: 3px solid $secondaryColor;
+      border: 3px solid var(--secondaryColor);
       padding-top: ($padding/2 - 2px);
       padding-bottom: ($padding/2 - 2px);
     }

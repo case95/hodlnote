@@ -3,21 +3,30 @@
 .container {
   padding: $padding;
   border-radius: ($padding/2);
-  color: set-text-color($primaryColor);
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .container-blue {
-  background-color: rgba($primaryColor, 0.85);
+  background-color: var(--primaryColor);
+  color: var(--whiteTextColor) !important;
 }
 
 .container-yellow {
-  background-color: rgba($secondaryColor, 0.85);
+  background-color: rgba(var(--secondaryColor), 0.85);
+  color: var(--textColor);
 }
 
 .container-white {
   background-color: rgba(#fff, 0.85);
+  color: var(--textColor);
 }
 
 .container-black {
-  background-color: rgba($textColor, 0.8);
+  background-color: rgba(var(--textColor), 0.8);
+  color: var(--whiteTextColor);
 }

@@ -1,26 +1,26 @@
 @import "../../config";
 
 .button {
-  color: $textColor;
+  color: var(--textColor);
   font-weight: $mediumWeight;
   padding: ($padding/2);
   border-radius: 1000px;
   outline: none;
   background: linear-gradient(
     225deg,
-    $secondaryColor 0%,
-    $secondaryColor 40%,
+    var(--secondaryColor) 0%,
+    var(--secondaryColor) 40%,
     white 50%,
-    $secondaryColor 60%,
-    $secondaryColor 100%
+    var(--secondaryColor) 60%,
+    var(--secondaryColor) 100%
   );
   background-size: 275%;
   background-position-x: left;
-  background-color: $secondaryColor;
-  border-left: 3px solid darken($secondaryColor, 15%);
-  border-bottom: 3px solid darken($secondaryColor, 15%);
-  border-right: 3px solid lighten($secondaryColor, 15%);
-  border-top: 3px solid lighten($secondaryColor, 15%);
+  background-color: var(--secondaryColor);
+  border-left: 3px solid brightness(var(--secondaryColor), 85%);
+  border-bottom: 3px solid brightness(var(--secondaryColor), 85%);
+  border-right: 3px solid brightness(var(--secondaryColor), 115%);
+  border-top: 3px solid brightness(var(--secondaryColor), 115%);
   @include transitioner(background-position, box-shadow);
   @include shadow(3px);
   cursor: pointer;

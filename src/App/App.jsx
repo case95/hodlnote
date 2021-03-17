@@ -12,7 +12,7 @@ import Browse from "../components/pages/Browse/Browse";
 import Login from "../components/pages/Login";
 import Register from "../components/pages/Register";
 import Wallets from "../components/pages/Wallets/Wallets";
-import TestFetch from "../components/pages/TestFetch/TestFetch";
+import TestFetch from "../components/pages/TestFetch/TestFetch.jsx";
 
 //Import style
 import "./App.css";
@@ -20,58 +20,38 @@ import "./App.css";
 export default class App extends Component {
   state = {
     navLinksList: [
-      { name: "Browse", link: "/browse" },
+      // { name: "Browse", link: "/browse" },
       { name: "Login", link: "/login" },
       { name: "Register", link: "/register" },
     ],
-    userWallets: [
-      {
-        fiatCurrency: "eur",
-        cryptoCurrency: "btc",
-        transactions: [
-          { fiatAmount: 5000, cryptoAmount: 0.6 },
-          { fiatAmount: 3000, cryptoAmount: 0.3 },
-          { fiatAmount: 2200, cryptoAmount: 0.12 },
-        ],
-      },
-      {
-        fiatCurrency: "usd",
-        cryptoCurrency: "eth",
-        transactions: [
-          { fiatAmount: 100, cryptoAmount: 0.2 },
-          { fiatAmount: 1200, cryptoAmount: 1.2 },
-        ],
-      },
-      {
-        fiatCurrency: "aud",
-        cryptoCurrency: "xrp",
-        transactions: [
-          { fiatAmount: 500, cryptoAmount: 800 },
-          { fiatAmount: 200, cryptoAmount: 433 },
-        ],
-      },
-    ],
+    userWallets: [],
+  };
+
+  addMovement = (newState) => {
+    this.setState({ userWallets: [...newState] });
   };
 
   // Mock login to display or not the Wallets page in the navigation bar
   handleLogin = () => {
     // Defines the object with the informations needed for the link to be created
     const walletLink = { name: "Wallets", link: "/wallets" };
+    const browseLink = { name: "Browse", link: "/browse" };
     // Checks the current status of the nav links (if the wallets is in the nav links or not)
     const included = this.state.navLinksList.some((obj) => {
-      return obj.name === walletLink.name;
+      return obj.name === walletLink.name || obj.name === browseLink.name;
     });
     // If Wallets is included in the nav links filter it out from the navLinksList and set the filtered list as state
     if (included) {
       const filteredNavLinksList = this.state.navLinksList.filter((obj) => {
-        return obj.name !== walletLink.name;
+        return obj.name !== walletLink.name && obj.name !== browseLink.name;
       });
       return this.setState({ navLinksList: filteredNavLinksList });
       // If Wallets isn't included in the navLinksList then add it to the state.
     } else {
       const updatedNavLinksList = [
-        ...this.state.navLinksList,
+        { name: "Browse", link: "/browse" },
         { name: "Wallets", link: "/wallets" },
+        ...this.state.navLinksList,
       ];
       return this.setState({ navLinksList: updatedNavLinksList });
     }
@@ -88,7 +68,17 @@ export default class App extends Component {
           <div className="responsive-container">
             <Switch>
               <Route exact path="/testfetch" component={TestFetch} />
-              <Route exact path="/browse" component={Browse} />
+              <Route
+                exact
+                path="/browse"
+                render={(props) => (
+                  <Browse
+                    walletsList={this.state.userWallets}
+                    setWalletList={this.addMovement}
+                    {...props}
+                  />
+                )}
+              />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route

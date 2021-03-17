@@ -1,23 +1,23 @@
 .button {
-  color: #333;
+  color: var(--textColor);
   font-weight: 500;
   padding: 12.5px;
   border-radius: 1000px;
   outline: none;
-  background: linear-gradient(225deg, #fcd53d 0%, #fcd53d 40%, white 50%, #fcd53d 60%, #fcd53d 100%);
+  background: linear-gradient(225deg, var(--secondaryColor) 0%, var(--secondaryColor) 40%, white 50%, var(--secondaryColor) 60%, var(--secondaryColor) 100%);
   background-size: 275%;
   background-position-x: left;
-  background-color: #fcd53d;
-  border-left: 3px solid #e9ba04;
-  border-bottom: 3px solid #e9ba04;
-  border-right: 3px solid #fde588;
-  border-top: 3px solid #fde588;
+  background-color: var(--secondaryColor);
+  border-left: 3px solid brightness(var(--secondaryColor), 85%);
+  border-bottom: 3px solid brightness(var(--secondaryColor), 85%);
+  border-right: 3px solid brightness(var(--secondaryColor), 115%);
+  border-top: 3px solid brightness(var(--secondaryColor), 115%);
   -webkit-transition: background-position 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
   transition: background-position 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
   transition: background-position 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   transition: background-position 0.2s ease-in-out, box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
-  -webkit-box-shadow: -3px 3px 6px 0 rgba(51, 51, 51, 0.5);
-          box-shadow: -3px 3px 6px 0 rgba(51, 51, 51, 0.5);
+  -webkit-box-shadow: -3px 3px 6px 0 rgba(15, 15, 15, 0.5);
+          box-shadow: -3px 3px 6px 0 rgba(15, 15, 15, 0.5);
   cursor: pointer;
 }
 
@@ -43,8 +43,8 @@
 
 .button:hover {
   background-position-x: right;
-  -webkit-box-shadow: -6px 6px 12px 0 rgba(51, 51, 51, 0.5);
-          box-shadow: -6px 6px 12px 0 rgba(51, 51, 51, 0.5);
+  -webkit-box-shadow: -6px 6px 12px 0 rgba(15, 15, 15, 0.5);
+          box-shadow: -6px 6px 12px 0 rgba(15, 15, 15, 0.5);
 }
 
 .button:hover .button-link {

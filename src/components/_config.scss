@@ -1,9 +1,4 @@
 // Colors
-$primaryColor: #5876fa;
-$secondaryColor: #fcd53d;
-$textColor: #333;
-$linksColor: darken($primaryColor, 30%);
-$activelinksColor: darken($linksColor, 30%);
 
 // Font
 $poppins: "Poppins", sans-serif;
@@ -38,7 +33,7 @@ $lg: 992px;
 // Shadow
 
 @mixin shadow($px) {
-  box-shadow: -$px $px ($px * 2) 0 rgba(51, 51, 51, 0.5);
+  box-shadow: -$px $px ($px * 2) 0 rgba(15, 15, 15, 0.5);
 }
 
 @function set-text-color($color) {

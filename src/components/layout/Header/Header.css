@@ -10,7 +10,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  background-color: #5876fa;
+  background-color: var(--primaryColor);
 }
 
 .header-logo {
@@ -42,8 +42,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#d0a603), to(#fde06f));
-  background-image: linear-gradient(0deg, #d0a603, #fde06f);
+  background-image: var(--secondaryColor);
   width: 0px;
   height: 50px;
   border-radius: 2px;
@@ -91,49 +90,130 @@
   background-color: white;
 }
 
+.header-hamburger-icon {
+  height: 20px;
+  width: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-transition: height 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
+}
+
+.header-hamburger-icon-line {
+  height: 4px;
+  background-color: white;
+  border-radius: 999px;
+}
+
+.header-hamburger-icon:hover {
+  height: 30px;
+}
+
+.header-hamburger-nav {
+  border-top: 2px solid var(--whiteTextColor);
+  width: 100%;
+  background-color: var(--primaryColor);
+  height: auto;
+  max-height: 100%;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1000;
+  -webkit-transition: max-height 0.2s ease-in-out;
+  transition: max-height 0.2s ease-in-out;
+  -webkit-box-shadow: -3px 3px 6px 0 rgba(15, 15, 15, 0.5);
+          box-shadow: -3px 3px 6px 0 rgba(15, 15, 15, 0.5);
+}
+
+.header-hamburger-nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+}
+
+.header-hamburger-nav ul .header-nav-item {
+  margin: 0;
+  padding: 12.5px 0;
+  border-bottom: 2px solid var(--whiteTextColor);
+}
+
+.header-hamburger-nav ul .header-nav-item:last-child {
+  border-bottom: none;
+}
+
+.header-hamburger-nav ul .header-nav-item-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+}
+
+.header-hamburger-nav ul .header-nav-item-link::before {
+  background-color: white;
+}
+
+.closed {
+  max-height: 0px;
+  -webkit-transition: max-height 0.2s ease-in-out;
+  transition: max-height 0.2s ease-in-out;
+}
+
 @-webkit-keyframes coin-spin {
   0% {
     background-image: url("https://en.bitcoin.it/w/images/en/2/29/BC_Logo_.png");
     -webkit-transform: rotateY(0deg);
             transform: rotateY(0deg);
-    border-right: 0px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
   }
   12% {
-    border-right: 8px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 8px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
     background-image: url("https://en.bitcoin.it/w/images/en/2/29/BC_Logo_.png");
   }
   15% {
     background-image: url("https://www.finaria.it/wp-content/uploads/2021/02/dogecoin-logo.png");
   }
   25% {
-    border-right: 8px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 8px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
   }
   50% {
     -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg);
-    border-right: 0px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
   }
   62% {
-    border-right: 0px solid #d0a603;
-    border-left: 8px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 8px solid var(--secondaryColor), 20%;
     background-image: url("https://www.finaria.it/wp-content/uploads/2021/02/dogecoin-logo.png");
   }
   65% {
     background-image: url("https://en.bitcoin.it/w/images/en/2/29/BC_Logo_.png");
   }
   75% {
-    border-right: 0px solid #d0a603;
-    border-left: 8px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 8px solid var(--secondaryColor), 20%;
   }
   100% {
     -webkit-transform: rotateY(0deg);
             transform: rotateY(0deg);
-    border-right: 0px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
   }
 }
 
@@ -142,44 +222,44 @@
     background-image: url("https://en.bitcoin.it/w/images/en/2/29/BC_Logo_.png");
     -webkit-transform: rotateY(0deg);
             transform: rotateY(0deg);
-    border-right: 0px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
   }
   12% {
-    border-right: 8px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 8px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
     background-image: url("https://en.bitcoin.it/w/images/en/2/29/BC_Logo_.png");
   }
   15% {
     background-image: url("https://www.finaria.it/wp-content/uploads/2021/02/dogecoin-logo.png");
   }
   25% {
-    border-right: 8px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 8px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
   }
   50% {
     -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg);
-    border-right: 0px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
   }
   62% {
-    border-right: 0px solid #d0a603;
-    border-left: 8px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 8px solid var(--secondaryColor), 20%;
     background-image: url("https://www.finaria.it/wp-content/uploads/2021/02/dogecoin-logo.png");
   }
   65% {
     background-image: url("https://en.bitcoin.it/w/images/en/2/29/BC_Logo_.png");
   }
   75% {
-    border-right: 0px solid #d0a603;
-    border-left: 8px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 8px solid var(--secondaryColor), 20%;
   }
   100% {
     -webkit-transform: rotateY(0deg);
             transform: rotateY(0deg);
-    border-right: 0px solid #d0a603;
-    border-left: 0px solid #d0a603;
+    border-right: 0px solid var(--secondaryColor), 20%;
+    border-left: 0px solid var(--secondaryColor), 20%;
   }
 }
 

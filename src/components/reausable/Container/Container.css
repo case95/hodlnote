@@ -1,22 +1,41 @@
 .container {
   padding: 25px;
   border-radius: 12.5px;
-  color: #fff;
+}
+
+.container-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .container-blue {
-  background-color: rgba(88, 118, 250, 0.85);
+  background-color: var(--primaryColor);
+  color: var(--whiteTextColor) !important;
 }
 
 .container-yellow {
-  background-color: rgba(252, 213, 61, 0.85);
+  background-color: rgba(var(--secondaryColor), 0.85);
+  color: var(--textColor);
 }
 
 .container-white {
   background-color: rgba(255, 255, 255, 0.85);
+  color: var(--textColor);
 }
 
 .container-black {
-  background-color: rgba(51, 51, 51, 0.8);
+  background-color: rgba(var(--textColor), 0.8);
+  color: var(--whiteTextColor);
 }
 /*# sourceMappingURL=Container.css.map */

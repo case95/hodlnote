@@ -1,6 +1,23 @@
-.wallet {
-  &-content {
-    display: flex;
-    justify-content: space-between;
+.wallets {
+  .wallet {
+    align-self: stretch;
+    &-name {
+    }
+    &-content {
+      display: flex;
+      justify-content: space-between;
+      .green {
+        color: rgb(116, 226, 116);
+      }
+      .red {
+        color: red;
+      }
+    }
   }
+}
+.empty {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
 }

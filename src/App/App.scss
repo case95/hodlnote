@@ -1,9 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap");
 @import "../components/config";
 
-html {
+html[data-theme="dark"] {
   scroll-behavior: smooth;
+  --bgColor: #222635;
+  --primaryColor: #2f3a5a;
+  --secondaryColor: #e68a13;
+  --textColor: rgb(241, 241, 241);
+  --whiteTextColor: #fff;
+  --linksColor: #5876fa;
+  --activelinksColor: #68afff;
 }
+
+html[data-theme="light"] {
+  scroll-behavior: smooth;
+  --bgColor: #fbfbfb;
+  --primaryColor: #5876fa;
+  --secondaryColor: #fcd53d;
+  --textColor: #333;
+  --whiteTextColor: #fff;
+  --linksColor: #263474;
+  --activelinksColor: #1a2141;
+}
+
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -14,13 +33,17 @@ html {
   .responsive-container {
     min-height: calc(100vh - 225px);
   }
+
+  body {
+    color: var(--textColor);
+  }
   a {
     text-decoration: none;
     font-size: $textSize;
     font-weight: $mediumWeight;
-    color: $linksColor;
+    color: var(--linksColor);
     &:active {
-      color: $activelinksColor;
+      color: var(--activelinksColor);
     }
   }
   p {
@@ -32,10 +55,11 @@ html {
   hr {
     margin: (2 * $padding) 0;
     height: 0;
-    background: $textColor;
-    border: 0.5px solid $textColor;
+    background: var(--textColor);
+    border: 0.5px solid var(--textColor);
   }
-  input:focus {
+  input:focus,
+  select:focus {
     outline: none;
   }
 }
@@ -47,6 +71,10 @@ input::-webkit-inner-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.responsive-container {
+  background-color: var(--bgColor);
 }
 
 @import "../assets/responsivity";

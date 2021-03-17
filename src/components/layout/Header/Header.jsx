@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 // IMporting custom components
 import MyLink from "../../reausable/MyLink/MyLink";
 
 import "./Header.css";
+
 const Header = ({ navLinksList, onLogin }) => {
+  const [displayMenu, setDisplayMenu] = useState(false);
+
   const createNavLinks = (pages) => {
     return pages.map((page) => {
       const { link, name } = page;
@@ -36,19 +40,35 @@ const Header = ({ navLinksList, onLogin }) => {
   };
 
   return (
-    <header className="header" id="header">
-      <Link to="/">
-        <div className="header-logo"></div>
-      </Link>
-
-      <nav className="header-nav">
+    <Fragment>
+      <header className="header" id="header">
+        <Link to="/">
+          <div className="header-logo"></div>
+        </Link>
+        <div
+          className="header-hamburger-icon"
+          onClick={() => setDisplayMenu(!displayMenu)}
+        >
+          <div className="header-hamburger-icon-line"></div>
+          <div className="header-hamburger-icon-line"></div>
+          <div className="header-hamburger-icon-line"></div>
+        </div>
+        <nav className="header-nav">
+          <ul>
+            {Array.isArray(navLinksList) &&
+              navLinksList.length > 0 &&
+              createNavLinks(navLinksList)}
+          </ul>
+        </nav>
+      </header>
+      <nav className={`header-hamburger-nav ${displayMenu ? "" : "closed"}`}>
         <ul>
           {Array.isArray(navLinksList) &&
             navLinksList.length > 0 &&
             createNavLinks(navLinksList)}
         </ul>
       </nav>
-    </header>
+    </Fragment>
   );
 };
 

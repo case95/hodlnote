@@ -28,12 +28,26 @@ const Browse = (props) => {
 
   useEffect(() => {
     const fetchFiatCurrencies = async () => {
-      const fetchedData = await exchangeratesService();
+      const fetchedData = await exchangeratesService("USD");
       setFiatCurrencies([...fetchedData]);
     };
 
     fetchFiatCurrencies();
   }, []);
+
+  const openAccordion = (e) => {
+    const accordionOpenStatus = { ...accordionState };
+    Object.keys(accordionOpenStatus).forEach(function (key) {
+      accordionOpenStatus[key] = false;
+    });
+
+    setAccordionState({
+      ...accordionOpenStatus,
+      [e.currentTarget.getAttribute("name")]: !accordionState[
+        e.currentTarget.getAttribute("name")
+      ],
+    });
+  };
 
   if (!(Array.isArray(fiatCurrencies) && fiatCurrencies.length > 0)) {
     return (
@@ -44,40 +58,35 @@ const Browse = (props) => {
       </div>
     );
   } else {
-    console.log(
-      "%cFIAT CURRENCIES: ",
-      "background: #292; color: #000",
-      fiatCurrencies
-    );
     return (
       <div className="browse">
         <Accordion
           title={<Title>Browse by value</Title>}
           id={"1"}
-          accordionState={accordionState}
-          setAccordionState={setAccordionState}
-          influencedAccordion={"accordion2"}
-          influencedAccordionId={"2"}
-          thisAccordion={"accordion1"}
+          name="accordion1"
+          onClick={(e) => openAccordion(e)}
+          accordionOpenState={accordionState.accordion1}
         >
           <BrowseByValue
             history={props.history}
             fiatCurrencies={fiatCurrencies}
+            walletsList={props.walletsList}
+            setWalletList={props.setWalletList}
           ></BrowseByValue>
         </Accordion>
         <hr />
         <Accordion
           title={<Title>Browse by Date</Title>}
           id={"2"}
-          accordionState={accordionState}
-          setAccordionState={setAccordionState}
-          influencedAccordion={"accordion1"}
-          influencedAccordionId={"1"}
-          thisAccordion={"accordion2"}
+          name="accordion2"
+          onClick={(e) => openAccordion(e)}
+          accordionOpenState={accordionState.accordion2}
         >
           <BrowseByDate
             history={props.history}
             fiatCurrencies={fiatCurrencies}
+            walletsList={props.walletsList}
+            setWalletList={props.setWalletList}
           ></BrowseByDate>
         </Accordion>
       </div>

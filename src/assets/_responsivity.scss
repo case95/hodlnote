@@ -11,6 +11,14 @@
   padding-right: $padding;
   @include transitioner(padding);
 }
+.header-hamburger-nav {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+.header-nav {
+  display: none;
+}
 
 .home {
   &-hero {
@@ -28,6 +36,22 @@
   .footer {
     padding-left: $padding * 2;
     padding-right: $padding * 2;
+    .scroll-to-top {
+      display: block;
+    }
+    &-switch {
+      justify-content: center;
+      .scroll-to-top {
+        display: none;
+      }
+    }
+  }
+  .header-nav {
+    display: block;
+  }
+  .header-hamburger-nav,
+  .header-hamburger-icon {
+    display: none;
   }
 
   .home {

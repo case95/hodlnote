@@ -5,7 +5,7 @@ import "./Container.css";
 const Container = ({ color, className, children }) => {
   return (
     <div className={`container container-${color || "blue"} ${className}`}>
-      {children}
+      <div className="container-content">{children}</div>
     </div>
   );
 };

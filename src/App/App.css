@@ -1,6 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap");
-html {
+html[data-theme="dark"] {
   scroll-behavior: smooth;
+  --bgColor: #222635;
+  --primaryColor: #2f3a5a;
+  --secondaryColor: #e68a13;
+  --textColor: rgb(241, 241, 241);
+  --whiteTextColor: #fff;
+  --linksColor: #5876fa;
+  --activelinksColor: #68afff;
+}
+
+html[data-theme="light"] {
+  scroll-behavior: smooth;
+  --bgColor: #fbfbfb;
+  --primaryColor: #5876fa;
+  --secondaryColor: #fcd53d;
+  --textColor: #333;
+  --whiteTextColor: #fff;
+  --linksColor: #263474;
+  --activelinksColor: #1a2141;
 }
 
 * {
@@ -16,15 +34,19 @@ html {
   min-height: calc(100vh - 225px);
 }
 
+* body {
+  color: var(--textColor);
+}
+
 * a {
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  color: #0526b4;
+  color: var(--linksColor);
 }
 
 * a:active {
-  color: #01071f;
+  color: var(--activelinksColor);
 }
 
 * p {
@@ -38,11 +60,12 @@ html {
 * hr {
   margin: 50px 0;
   height: 0;
-  background: #333;
-  border: 0.5px solid #333;
+  background: var(--textColor);
+  border: 0.5px solid var(--textColor);
 }
 
-* input:focus {
+* input:focus,
+* select:focus {
   outline: none;
 }
 
@@ -54,6 +77,10 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.responsive-container {
+  background-color: var(--bgColor);
 }
 
 .responsive-container {
@@ -70,6 +97,15 @@ input[type="number"] {
   transition: padding 0.2s ease-in-out;
 }
 
+.header-hamburger-nav {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.header-nav {
+  display: none;
+}
+
 .home-hero {
   margin: -50px -25px 0 -25px;
 }
@@ -84,6 +120,27 @@ input[type="number"] {
   .footer {
     padding-left: 50px;
     padding-right: 50px;
+  }
+  .header .scroll-to-top,
+  .footer .scroll-to-top {
+    display: block;
+  }
+  .header-switch,
+  .footer-switch {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .header-switch .scroll-to-top,
+  .footer-switch .scroll-to-top {
+    display: none;
+  }
+  .header-nav {
+    display: block;
+  }
+  .header-hamburger-nav,
+  .header-hamburger-icon {
+    display: none;
   }
   .home-hero {
     margin: -50px -50px 0 -50px;

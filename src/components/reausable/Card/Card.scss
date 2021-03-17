@@ -9,9 +9,9 @@
   padding: $padding;
   margin: $padding;
   border-radius: ($padding/2);
-  background-color: $primaryColor;
+  background-color: var(--primaryColor);
   @include transitioner(transform, scale, box-shadow);
-  color: set-text-color($primaryColor);
+  color: var(--whiteTextColor);
   @include shadow(3px);
   &:first-child {
     margin-top: 0;

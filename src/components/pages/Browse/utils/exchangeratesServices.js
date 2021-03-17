@@ -1,13 +1,16 @@
 import exchangeratesApi from "./exchangeratesApi";
 
-const fiatApiCall = async () => {
+const fiatApiCall = async (baseCurrency) => {
   try {
-    const res = await exchangeratesApi().get("latest?base=USD");
+    const res = await exchangeratesApi().get(`latest?base=${baseCurrency}`);
 
     // Converts the object we got from the fetch to an array
     const cleanFiatPairs = [];
     for (const [key, value] of Object.entries(res.data.rates)) {
-      cleanFiatPairs.push({ id: key, value });
+      cleanFiatPairs.push({
+        id: key,
+        value: (Math.round(value * 100) / 100).toFixed(2),
+      });
     }
 
     // Adds EUR currency to the data array (only if there's no base in the query => base is automatically set to EUR and it doesn't appear in the values)
@@ -23,12 +26,6 @@ const fiatApiCall = async () => {
       }
       return 0;
     });
-
-    console.log(
-      `%cPAIRS: `,
-      "background: #222; color: #bada55",
-      sortedFiatPairs
-    );
 
     return sortedFiatPairs;
   } catch (err) {

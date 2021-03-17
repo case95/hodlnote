@@ -54,8 +54,8 @@ class BrowseByDate extends Component {
       periodEnd: "",
       fiatCurrency: "",
       cryptoCurrency: "",
-      fiatAmount: 0,
-      cryptoAmount: 0,
+      fiatAmount: null,
+      cryptoAmount: null,
     },
     errors: {},
     requireds: {},
@@ -74,7 +74,11 @@ class BrowseByDate extends Component {
 
   // NEED TO CHECK THIS
   componentDidUpdate(previousProps, previousState) {
-    if (previousState.dataByDate !== this.state.dataByDate) {
+    if (
+      previousState.dataByDate.cryptoAmount !==
+        this.state.dataByDate.cryptoAmount ||
+      previousState.dataByDate.fiatAmount !== this.state.dataByDate.fiatAmount
+    ) {
       const cryptoAmountInput = document.getElementById("date_cryptoAmount");
       const fiatAmountInput = document.getElementById("date_fiatAmount");
       if (this.state.dataByDate.cryptoAmount != false) {
@@ -187,7 +191,6 @@ class BrowseByDate extends Component {
       cryptoCurrency,
       fiatAmount,
       cryptoAmount,
-      name,
     } = this.state.dataByDate;
 
     return (

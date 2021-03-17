@@ -2,7 +2,7 @@
 
 .my-link {
   position: relative;
-  color: $linksColor;
+  color: var(--linksColor);
   &::before {
     content: "";
     position: absolute;
@@ -10,16 +10,16 @@
     left: 0;
     height: 2px;
     width: 0;
-    background-color: $linksColor;
+    background-color: var(--linksColor);
     @include transitioner(width);
   }
   &:hover::before {
     width: 100%;
   }
   &:active {
-    color: $activelinksColor;
+    color: var(--activelinksColor);
     &::before {
-      background-color: $activelinksColor;
+      background-color: var(--activelinksColor);
     }
   }
 }

@@ -4,6 +4,8 @@ import React, { Component, Fragment } from "react";
 import Input from "../../../reausable/Input/Input";
 import Button from "../../../reausable/Button/Button";
 
+import Joi from "joi";
+import exchangeratesService from "../utils/exchangeratesServices";
 import { validate, validateInput } from "./utils/validation";
 
 class BrowseByValue extends Component {
@@ -45,15 +47,17 @@ class BrowseByValue extends Component {
     dataByValue: {
       fiatCurrency: "",
       cryptoCurrency: "",
-      fiatAmount: 0,
-      cryptoAmount: 0,
-      unitValue: 0,
+      fiatAmount: null,
+      cryptoAmount: null,
+      unitValue: null,
     },
     errors: {},
     requireds: {},
+    schema: {},
   };
 
-  componentDidMount() {
+  // Since we need to define a schema and it requires an api call to get all the available currencies we need to make componentDidMount synchronous.
+  async componentDidMount() {
     const requireds = {};
     const inputs = Array.from(
       document.querySelectorAll(".browse-by-value-input")
@@ -62,6 +66,29 @@ class BrowseByValue extends Component {
       requireds[input.childNodes[1].name] = false;
     });
     this.setState({ requireds });
+
+    // This function takes the result of the exchangeratesService (an array of objects) and return a map with only the ids of each object.
+
+    const fetchFiatCurrencies = async () => {
+      const fetchedData = await exchangeratesService("USD");
+      return fetchedData.map((obj) => obj.id);
+    };
+
+    // the result of the function is assigned to a const.
+    const fiatCurrencies = await fetchFiatCurrencies();
+
+    // we define the schema using the spreaded array of string as valid values for fiatCurrency
+
+    const schema = Joi.object({
+      fiatCurrency: Joi.string()
+        .uppercase()
+        .valid(...fiatCurrencies),
+      cryptoCurrency: Joi.string().uppercase().valid("BTC", "ETH", "XRP"),
+      fiatAmount: Joi.number().greater(0),
+      cryptoAmount: Joi.number().greater(0),
+      unitValue: Joi.number().greater(0),
+    });
+    this.setState({ schema });
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -82,7 +109,7 @@ class BrowseByValue extends Component {
 
     const dataByValue = { ...this.state.dataByValue };
 
-    dataByValue[e.target.name] = e.target.value;
+    dataByValue[e.target.name] = e.target.value.toUpperCase();
     if (e.target.name === "fiatAmount") {
       delete dataByValue.cryptoAmount;
     } else if (e.target.name === "cryptoAmount") {
@@ -95,7 +122,7 @@ class BrowseByValue extends Component {
     // Manages errors for error labels
 
     const errors = { ...this.state.errors };
-    const errorMessage = validateInput(e.target);
+    const errorMessage = validateInput(e.target, this.state.schema);
 
     if (errorMessage) {
       errors[e.target.name] = errorMessage;
@@ -136,7 +163,7 @@ class BrowseByValue extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const errors = validate(this.state.dataByValue);
+    const errors = validate(this.state.dataByValue, this.state.schema);
     const inputs = Array.from(
       document.querySelectorAll(".browse-by-value-input")
     ).filter((input) => input.childNodes[1].disabled === false);
@@ -148,7 +175,94 @@ class BrowseByValue extends Component {
       }
     });
     if (!errors) {
-      this.props.history.push("/");
+      const fiatCurrencyData = this.props.fiatCurrencies.find(
+        (obj) => this.state.dataByValue.fiatCurrency === obj.id
+      );
+
+      const walletList = [...this.props.walletsList];
+
+      if ("fiatAmount" in this.state.dataByValue) {
+        const amountInBaseCurrency = parseFloat(
+          (this.state.dataByValue.fiatAmount / fiatCurrencyData.value).toFixed(
+            2
+          )
+        );
+
+        const cryptoAmount = parseFloat(
+          (
+            this.state.dataByValue.fiatAmount / this.state.dataByValue.unitValue
+          ).toFixed(8)
+        );
+        const transaction = {
+          fiatAmount: amountInBaseCurrency,
+          cryptoAmount,
+          cryptoCurrency: this.state.dataByValue.cryptoCurrency,
+        };
+
+        var walletIndex = null;
+
+        if (
+          walletList.findIndex((wallet) => {
+            return wallet.cryptoCurrency === transaction.cryptoCurrency;
+          }) !== -1
+        ) {
+          walletIndex = walletList.findIndex((wallet) => {
+            return wallet.cryptoCurrency === transaction.cryptoCurrency;
+          });
+        } else {
+          walletList.push({
+            fiatCurrency: "USD",
+            cryptoCurrency: transaction.cryptoCurrency,
+            transactions: [],
+          });
+          walletIndex = walletList.length - 1;
+        }
+
+        walletList[walletIndex].transactions.push(transaction);
+      } else {
+        const unitValueInBaseCurrency =
+          this.state.dataByValue.unitValue / fiatCurrencyData.value;
+
+        console.log(
+          "%cUNIT VALUE IN BASE CURRENCY: ",
+          "background:green",
+          unitValueInBaseCurrency
+        );
+
+        console.log(
+          "%cFIAT AMOUNT IN BASE CURRENCY: ",
+          "background:red",
+          (
+            this.state.dataByValue.cryptoAmount * unitValueInBaseCurrency
+          ).toFixed(2)
+        );
+
+        const amountInBaseCurrency = parseFloat(
+          parseFloat(
+            (
+              this.state.dataByValue.cryptoAmount * unitValueInBaseCurrency
+            ).toFixed(2)
+          )
+        );
+
+        const cryptoAmount = parseFloat(
+          parseFloat(parseFloat(this.state.dataByValue.cryptoAmount).toFixed(8))
+        );
+
+        const transaction = {
+          fiatAmount: amountInBaseCurrency,
+          cryptoAmount,
+          cryptoCurrency: this.state.dataByValue.cryptoCurrency,
+        };
+
+        const walletIndex = walletList.findIndex((wallet) => {
+          return wallet.cryptoCurrency === transaction.cryptoCurrency;
+        });
+
+        walletList[walletIndex].transactions.push(transaction);
+      }
+      this.props.setWalletList([...walletList]);
+      this.props.history.push("/wallets");
     }
   };
 
@@ -237,11 +351,19 @@ class BrowseByValue extends Component {
                     requiredLabel={this.state.requireds[name]}
                     key={name}
                     className="browse-by-value-input"
-                    value={this.state.dataByValue[name].id}
+                    value={this.state.dataByValue[name]}
                     name={name}
                   >
+                    <option defaultValue value={""}>
+                      Select an option
+                    </option>
+                    {/* fiatCurrencies is an array of objects {id: currency name , value: its value compared to dollar} received by the Browse page state */}
                     {this.props.fiatCurrencies.map((currency) => {
-                      return <option value={currency.id}>{currency.id}</option>;
+                      return (
+                        <option value={currency.id} key={currency.id}>
+                          {currency.id}
+                        </option>
+                      );
                     })}
                   </Input>
                 );

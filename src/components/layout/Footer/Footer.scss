@@ -3,7 +3,7 @@
 .footer {
   width: 100%;
   min-height: 125px;
-  background-color: $primaryColor;
+  background-color: var(--primaryColor);
   padding-top: $padding;
   padding-bottom: $padding;
   &-nav {
@@ -12,6 +12,9 @@
     ul {
       display: flex;
       align-items: center;
+    }
+    .scroll-to-top {
+      display: none;
     }
     &-item {
       margin: 0 10px;
@@ -30,6 +33,11 @@
         }
       }
     }
+  }
+  &-switch {
+    display: flex;
+    justify-content: space-between;
+    margin-top: ($padding/2);
   }
   .scroll-to-top {
     line-height: $textSize/2 + 5;
@@ -55,11 +63,11 @@
   hr {
     margin-top: ($padding/2);
     margin-bottom: ($padding/2);
-    border: $linksColor 1px solid;
-    background-color: $linksColor;
+    border: var(--linksColor) 1px solid;
+    background-color: var(--linksColor);
   }
   &-copyright {
-    color: $linksColor;
+    color: var(--linksColor);
     text-align: center;
   }
 }
