@@ -1,8 +1,9 @@
+/* eslint-disable eqeqeq */
 import React, { Component, Fragment } from "react";
 
 // Importing custom components
-import Input from "../../../reausable/Input/Input";
-import Button from "../../../reausable/Button/Button";
+import Input from "../../../reusable/Input/Input";
+import Button from "../../../reusable/Button/Button";
 
 import Joi from "joi";
 import exchangeratesService from "../utils/exchangeratesServices";
@@ -63,7 +64,7 @@ class BrowseByValue extends Component {
       document.querySelectorAll(".browse-by-value-input")
     ).filter((input) => input.childNodes[1].disabled === false);
     inputs.map((input) => {
-      requireds[input.childNodes[1].name] = false;
+      return (requireds[input.childNodes[1].name] = false);
     });
     this.setState({ requireds });
 
@@ -173,6 +174,7 @@ class BrowseByValue extends Component {
       if (input.childNodes[1].value == false) {
         return input.classList.add("required");
       }
+      return undefined;
     });
     if (!errors) {
       const fiatCurrencyData = this.props.fiatCurrencies.find(
@@ -199,7 +201,7 @@ class BrowseByValue extends Component {
           cryptoCurrency: this.state.dataByValue.cryptoCurrency,
         };
 
-        var walletIndex = null;
+        let walletIndex = null;
 
         if (
           walletList.findIndex((wallet) => {
@@ -223,20 +225,6 @@ class BrowseByValue extends Component {
         const unitValueInBaseCurrency =
           this.state.dataByValue.unitValue / fiatCurrencyData.value;
 
-        console.log(
-          "%cUNIT VALUE IN BASE CURRENCY: ",
-          "background:green",
-          unitValueInBaseCurrency
-        );
-
-        console.log(
-          "%cFIAT AMOUNT IN BASE CURRENCY: ",
-          "background:red",
-          (
-            this.state.dataByValue.cryptoAmount * unitValueInBaseCurrency
-          ).toFixed(2)
-        );
-
         const amountInBaseCurrency = parseFloat(
           parseFloat(
             (
@@ -255,13 +243,29 @@ class BrowseByValue extends Component {
           cryptoCurrency: this.state.dataByValue.cryptoCurrency,
         };
 
-        const walletIndex = walletList.findIndex((wallet) => {
-          return wallet.cryptoCurrency === transaction.cryptoCurrency;
-        });
+        let walletIndex = null;
+
+        if (
+          walletList.findIndex((wallet) => {
+            return wallet.cryptoCurrency === transaction.cryptoCurrency;
+          }) !== -1
+        ) {
+          walletIndex = walletList.findIndex((wallet) => {
+            return wallet.cryptoCurrency === transaction.cryptoCurrency;
+          });
+        } else {
+          walletList.push({
+            fiatCurrency: "USD",
+            cryptoCurrency: transaction.cryptoCurrency,
+            transactions: [],
+          });
+          walletIndex = walletList.length - 1;
+        }
 
         walletList[walletIndex].transactions.push(transaction);
       }
       this.props.setWalletList([...walletList]);
+      localStorage.setItem("wallets", JSON.stringify(walletList));
       this.props.history.push("/wallets");
     }
   };

@@ -1,10 +1,13 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // Importing custom components
-import Card from "../../reausable/Card/Card";
-import Container from "../../reausable/Container/Container";
-import Button from "../../reausable/Button/Button";
+import Card from "../../reusable/Card/Card";
+import Container from "../../reusable/Container/Container";
+import Button from "../../reusable/Button/Button";
+
+import heroLight from "../../../sourceFiles/HeroHodlLight_web.png";
+import heroDark from "../../../sourceFiles/HeroHodlDark_web.png";
 
 import "./Home.css";
 
@@ -39,14 +42,28 @@ const Home = () => {
     },
   ];
 
+  const [hero, setHero] = useState(null);
+  var mode = localStorage.getItem("UIMode");
+
+  const changeHero = () => {
+    if (
+      localStorage.getItem("UIMode") &&
+      localStorage.getItem("UIMode") === "dark"
+    ) {
+      return setHero(heroDark);
+    } else {
+      return setHero(heroLight);
+    }
+  };
+
+  useEffect(() => {
+    changeHero();
+  }, [mode]);
+
   return (
     <div className="home">
       <div className="home-hero">
-        <img
-          src="https://cdn.discordapp.com/attachments/814812175436742667/814812257586380840/02ddd20767cfa24f488dcfdfda220b8f.png"
-          alt="Tf"
-          className="home-hero-image"
-        />
+        <img src={hero} alt="Tf" className="home-hero-image" />
         <Container className=" home-hero-content">
           <Fragment>
             <h1>BLABLABLA CRYPTO</h1>

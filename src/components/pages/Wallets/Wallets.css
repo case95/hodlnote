@@ -21,6 +21,14 @@
   color: red;
 }
 
+.wallets .wallet-container {
+  margin: 0 0 12.5px 0;
+}
+
+.wallets .wallet-container:last-child {
+  margin: 0;
+}
+
 .empty {
   display: -webkit-box;
   display: -ms-flexbox;

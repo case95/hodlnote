@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 // IMporting custom components
-import MyLink from "../../reausable/MyLink/MyLink";
+import MyLink from "../../reusable/MyLink/MyLink";
 
 import "./Header.css";
 

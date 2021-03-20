@@ -1,8 +1,8 @@
+@import "../../config";
+
 .wallets {
   .wallet {
     align-self: stretch;
-    &-name {
-    }
     &-content {
       display: flex;
       justify-content: space-between;
@@ -12,6 +12,12 @@
       .red {
         color: red;
       }
+    }
+  }
+  .wallet-container {
+    margin: 0 0 $padding / 2 0;
+    &:last-child {
+      margin: 0;
     }
   }
 }

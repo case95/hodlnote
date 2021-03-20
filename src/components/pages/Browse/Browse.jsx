@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import Title from "../../reausable/Title/Title";
+import Title from "../../reusable/Title/Title";
 import BrowseByValue from "./BrowseByValue/BrowseByValue";
 import BrowseByDate from "./BrowseByDate/BrowseByDate";
-import Accordion from "../../reausable/Accordion/Accordion";
-import Spinner from "../../reausable/Spinner/Spinner";
+import Accordion from "../../reusable/Accordion/Accordion";
+import Spinner from "../../reusable/Spinner/Spinner";
 
 import exchangeratesService from "./utils/exchangeratesServices";
 

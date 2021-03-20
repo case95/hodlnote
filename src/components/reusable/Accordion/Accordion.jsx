@@ -27,7 +27,7 @@ const Accordion = ({
       </div>
       <div
         className={`accordion-content ${
-          accordionOpenState === false ? "" : "accordion-content-open"
+          accordionOpenState ? "accordion-content-open" : ""
         }`}
         id={`accordion-content-${id}`}
       >

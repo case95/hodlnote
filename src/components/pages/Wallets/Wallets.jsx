@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Accordion from "../../reausable/Accordion/Accordion";
-import Container from "../../reausable/Container/Container";
+import Accordion from "../../reusable/Accordion/Accordion";
+import Container from "../../reusable/Container/Container";
 
 import "./Wallets.css";
 
@@ -24,9 +24,9 @@ export default class Wallets extends Component {
     const walletOpenStatus = {};
     const setWalletOpenStatus = () => {
       this.props.walletsList.map((wallet) => {
-        walletOpenStatus[
+        return (walletOpenStatus[
           `${wallet.cryptoCurrency}-${wallet.fiatCurrency}`
-        ] = false;
+        ] = false);
       });
     };
     setWalletOpenStatus();
@@ -36,10 +36,19 @@ export default class Wallets extends Component {
     });
   }
 
+  componentWillUnmount() {
+    const msg = {
+      type: "unsubscribe",
+      product_ids: [],
+      channels: ["ticker"],
+    };
+    const jsonMsg = JSON.stringify(msg);
+    this.webSocket.current.send(jsonMsg);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.pair !== this.state.pair) {
       if (!this.first.current) {
-        console.log("Returning on first render");
         return;
       }
       const msg = {
@@ -60,7 +69,7 @@ export default class Wallets extends Component {
         }
 
         if (data.product_id === this.state.pair) {
-          console.log(data.price);
+          // console.log(data.price);
           this.setState({ price: data.price });
         }
       };
@@ -68,7 +77,6 @@ export default class Wallets extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.currentTarget.getAttribute("name"));
     const walletOpenStatus = { ...this.state.walletOpenStatus };
 
     Object.keys(walletOpenStatus).forEach(function (key) {
@@ -90,7 +98,7 @@ export default class Wallets extends Component {
   sum = (wallet, pointer) => {
     var total = 0;
     wallet.transactions.map((transaction) => {
-      total += transaction[pointer];
+      return (total += transaction[pointer]);
     });
     return parseFloat(total);
   };
@@ -103,7 +111,7 @@ export default class Wallets extends Component {
       ).toFixed(2);
 
       return (
-        <Container>
+        <Container className="wallet-container">
           <Accordion
             className="wallet"
             accordionOpenState={

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 
 // Importing custom components
-import Input from "../../../reausable/Input/Input";
-import Button from "../../../reausable/Button/Button";
+import Input from "../../../reusable/Input/Input";
+import Button from "../../../reusable/Button/Button";
 
 import { validate, validateData, validateInput } from "./utils/validation";
 

@@ -1,25 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
 // IMporting custom components
-import MyLink from "../../reausable/MyLink/MyLink";
-import Switch from "../../reausable/Switch/Switch";
+import MyLink from "../../reusable/MyLink/MyLink";
+import Switch from "../../reusable/Switch/Switch";
 
 import "./Footer.css";
 
-const Footer = ({ navLinksList, onLogin }) => {
+const Footer = ({ navLinksList, onLogin, checkState, onCheck }) => {
   // Returns all the nav links in the Link component layout.
-
-  const [checked, setChecked] = useState(false);
-
-  const onDarkMode = () => {
-    if (!checked) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-
-    setChecked(!checked);
-  };
 
   const createNavLinks = (pages) => {
     return pages.map((page) => {
@@ -63,9 +51,9 @@ const Footer = ({ navLinksList, onLogin }) => {
       </nav>
       <div className="footer-switch">
         <Switch
-          onCheck={() => onDarkMode()}
-          checkedState={checked}
-          label={`switch to ${checked ? `light` : `dark`} mode`}
+          onCheck={() => onCheck()}
+          checkState={checkState}
+          label={`switch to ${checkState ? `light` : `dark`} mode`}
         ></Switch>
         <a href="#header" className="scroll-to-top">
           Back <br></br> to Top
