@@ -1,8 +1,10 @@
 import axios from "axios";
 
 // Base API endpoint
-export default () => {
+const api = () => {
   return axios.create({
     baseURL: "https://api.pro.coinbase.com/",
   });
 };
+
+export default api;

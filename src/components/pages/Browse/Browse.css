@@ -76,6 +76,16 @@
           align-items: center;
 }
 
+.browse-by-date form .chart-container {
+  width: 100%;
+  margin: 25px 0;
+}
+
+.browse-by-date form .chart-container .chart {
+  width: 100%;
+  height: 800px;
+}
+
 .browse-by-date form .browse-by-date-input {
   min-width: 100%;
   margin: 12.5px 0;

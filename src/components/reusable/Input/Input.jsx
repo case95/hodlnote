@@ -15,6 +15,7 @@ const Input = ({
   className,
   disabled,
   children,
+  name,
   ...otherProps
 }) => {
   const numberSanitizer = (e) => {
@@ -26,17 +27,12 @@ const Input = ({
     }
   };
 
-  const requiredResetter = (e) => {
-    if (e.target.value !== "") {
-      document.getElementById(`input-${id}`).classList.remove("required");
-    }
-  };
   if (type !== "select") {
     return (
       <div
-        className={`input ${requiredLabel === true ? " required " : ""}  ${
-          disabled === true ? " disabled " : ""
-        }${className}`}
+        className={`input ${
+          (!disabled && requiredLabel) === true ? " required " : ""
+        }  ${disabled === true ? " disabled " : ""}${className}`}
         id={`input-${id}`}
       >
         <label className="input-label" htmlFor={id}>
@@ -53,11 +49,11 @@ const Input = ({
           disabled={disabled}
           onChange={(e) => {
             onChange(e);
-            requiredResetter(e);
           }}
           onKeyDown={(e) => {
             numberSanitizer(e);
           }}
+          name={name}
           {...otherProps}
         ></input>
         {!disabled && error && <small>{error}</small>}
@@ -85,11 +81,11 @@ const Input = ({
           disabled={disabled}
           onChange={(e) => {
             onChange(e);
-            requiredResetter(e);
           }}
           onKeyDown={(e) => {
             numberSanitizer(e);
           }}
+          name={name}
           {...otherProps}
         >
           {children}

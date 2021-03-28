@@ -111,7 +111,7 @@ export default class Wallets extends Component {
       ).toFixed(2);
 
       return (
-        <Container className="wallet-container">
+        <Container className="wallet-container" key={`wallet-${index}`}>
           <Accordion
             className="wallet"
             accordionOpenState={

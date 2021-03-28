@@ -48,9 +48,9 @@ class BrowseByValue extends Component {
     dataByValue: {
       fiatCurrency: "",
       cryptoCurrency: "",
-      fiatAmount: null,
-      cryptoAmount: null,
-      unitValue: null,
+      fiatAmount: undefined,
+      cryptoAmount: undefined,
+      unitValue: undefined,
     },
     errors: {},
     requireds: {},
@@ -92,18 +92,18 @@ class BrowseByValue extends Component {
     this.setState({ schema });
   }
 
-  componentDidUpdate(previousProps, previousState) {
-    if (previousState.dataByValue !== this.state.dataByValue) {
-      const cryptoAmountInput = document.getElementById("cryptoAmount");
-      const fiatAmountInput = document.getElementById("fiatAmount");
-      if (this.state.dataByValue.cryptoAmount != false) {
-        fiatAmountInput.parentElement.classList.remove("required");
-      }
-      if (this.state.dataByValue.fiatAmount != false) {
-        cryptoAmountInput.parentElement.classList.remove("required");
-      }
-    }
-  }
+  // componentDidUpdate(previousProps, previousState) {
+  //   if (previousState.dataByValue !== this.state.dataByValue) {
+  //     const cryptoAmountInput = document.getElementById("cryptoAmount");
+  //     const fiatAmountInput = document.getElementById("fiatAmount");
+  //     if (this.state.dataByValue.cryptoAmount != false) {
+  //       fiatAmountInput.parentElement.classList.remove("required");
+  //     }
+  //     if (this.state.dataByValue.fiatAmount != false) {
+  //       cryptoAmountInput.parentElement.classList.remove("required");
+  //     }
+  //   }
+  // }
 
   onInputChange = (e) => {
     // Sets the input data in the data state
@@ -111,6 +111,7 @@ class BrowseByValue extends Component {
     const dataByValue = { ...this.state.dataByValue };
 
     dataByValue[e.target.name] = e.target.value.toUpperCase();
+
     if (e.target.name === "fiatAmount") {
       delete dataByValue.cryptoAmount;
     } else if (e.target.name === "cryptoAmount") {
@@ -170,12 +171,15 @@ class BrowseByValue extends Component {
     ).filter((input) => input.childNodes[1].disabled === false);
     this.setState({ errors: errors || {} });
     // NEED TO SET REQIRED VIA STATE.REQUIREDS AND NOT BY CLASSLIST.ADD
+    const requireds = {};
     inputs.map((input) => {
       if (input.childNodes[1].value == false) {
-        return input.classList.add("required");
+        return (requireds[input.childNodes[1].name] = true);
       }
       return undefined;
     });
+    this.setState({ requireds });
+
     if (!errors) {
       const fiatCurrencyData = this.props.fiatCurrencies.find(
         (obj) => this.state.dataByValue.fiatCurrency === obj.id
